@@ -1,0 +1,269 @@
+/* ====== COLOURS: change these to restyle everything ======
+   Pin colours themselves are set in app.js (PEOPLE) so they
+   can match the pins on your physical map. */
+:root {
+  --bg: #f6f3ec;          /* warm paper */
+  --surface: #fffdf8;
+  --ink: #2c3a30;         /* deep green-black */
+  --muted: #6b766d;
+  --green: #5e7d5a;       /* sage / forest */
+  --green-dark: #3f5a3d;
+  --pink: #d98c95;        /* dusty rose */
+  --pink-soft: #f3dfe0;
+  --line: #e4ded2;
+  --radius: 18px;
+  --shadow: 0 6px 24px rgba(44, 58, 48, .12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100%;
+  font-family: 'Nunito', sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+.hidden { display: none !important; }
+
+h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 700; letter-spacing: -.01em; }
+
+/* =========================================================
+   HOME
+   ========================================================= */
+#home {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 16px 32px;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+.home-header { text-align: center; margin-bottom: 28px; }
+.mark {
+  width: 64px; height: 64px; margin: 0 auto 14px;
+  display: grid; place-items: center; font-size: 32px;
+  background: var(--pink-soft); border-radius: 50%;
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 2px var(--green);
+}
+.home-header h1 { font-size: clamp(32px, 8vw, 42px); color: var(--green-dark); }
+.sub { color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+.grid { display: grid; gap: 12px; }
+
+.map-card {
+  position: relative;
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--c, var(--green));
+  border-radius: var(--radius);
+  box-shadow: 0 2px 0 var(--line);
+  transition: transform .15s, box-shadow .15s;
+}
+.map-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.map-card:active { transform: translateY(0); }
+
+.map-card .emoji {
+  flex: none; width: 46px; height: 46px; border-radius: 12px;
+  display: grid; place-items: center; font-size: 24px;
+  background: color-mix(in srgb, var(--c, var(--green)) 15%, white);
+}
+.map-card .text { flex: 1; min-width: 0; }
+.map-card .title { display: block; font-family: 'Fraunces', serif; font-weight: 700; font-size: 19px; }
+.map-card .desc { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+.map-card .num {
+  flex: none; font-size: 13px; font-weight: 700; color: var(--c, var(--green));
+}
+
+/* The special "just for Thomas" card */
+.map-card.private {
+  background: linear-gradient(135deg, var(--pink-soft), var(--surface) 60%);
+  border-color: var(--pink);
+  margin-top: 10px;
+}
+.map-card .tag {
+  position: absolute; top: -10px; right: 14px;
+  background: var(--green-dark); color: white;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
+}
+
+.home-foot {
+  margin-top: auto; padding-top: 40px; text-align: center;
+  font-family: 'Fraunces', serif; color: var(--muted); font-size: 15px;
+}
+.home-foot .amp { color: var(--pink); }
+
+/* =========================================================
+   MAP VIEW
+   ========================================================= */
+#mapView { position: fixed; inset: 0; }
+
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1100;
+  height: 60px; padding: 0 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.topbar h2 {
+  font-size: 20px; color: var(--green-dark);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.back { font-weight: 700; color: var(--green); padding: 8px 4px; white-space: nowrap; }
+
+.pill {
+  background: var(--green); color: white; border: none; cursor: pointer;
+  font-weight: 700; font-size: 14px; padding: 8px 16px; border-radius: 999px;
+}
+.pill:active { background: var(--green-dark); }
+
+#map { position: absolute; top: 60px; left: 0; right: 0; bottom: 0; background: var(--bg); }
+
+.legend {
+  position: absolute; top: 72px; left: 12px; z-index: 1050;
+  background: var(--surface); border-radius: 12px; padding: 8px 12px;
+  box-shadow: var(--shadow); font-size: 13px; font-weight: 600;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.legend span { display: flex; align-items: center; gap: 8px; }
+.legend i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+
+.empty {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1050;
+  background: var(--surface); padding: 12px 20px; border-radius: 999px;
+  box-shadow: var(--shadow); color: var(--muted);
+}
+
+/* ---------- Pins ---------- */
+.pin {
+  width: 40px; height: 40px; border-radius: 50% 50% 50% 0;
+  background: var(--c); transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid white; box-shadow: 0 3px 8px rgba(0,0,0,.25);
+  transition: transform .2s;
+}
+.pin span { transform: rotate(45deg); font-size: 18px; line-height: 1; }
+.pin:hover, .pin.active { transform: rotate(-45deg) scale(1.18); }
+
+/* ---------- Story card ---------- */
+#card {
+  --c: var(--green);
+  position: absolute; z-index: 1100; left: 50%; bottom: 16px;
+  width: min(420px, calc(100% - 32px));
+  max-height: 72vh;
+  display: flex; flex-direction: column;
+  background: var(--surface); border-radius: var(--radius);
+  border-top: 5px solid var(--c);
+  box-shadow: 0 12px 40px rgba(0,0,0,.22);
+  overflow: hidden;
+  transform: translate(-50%, 130%);
+  transition: transform .45s cubic-bezier(.2,.9,.3,1.15);
+}
+#card.open { transform: translate(-50%, 0); }
+/* ---------- Photo gallery ---------- */
+.gallery { position: relative; flex: none; height: 220px; background: var(--line); }
+
+.slides {
+  display: flex; height: 100%;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;            /* hide scrollbar (Firefox) */
+  -webkit-overflow-scrolling: touch;
+}
+.slides::-webkit-scrollbar { display: none; }  /* hide scrollbar (Chrome/Safari) */
+.slides img {
+  flex: 0 0 100%; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  scroll-snap-align: start; user-select: none;
+}
+
+/* Arrows and dots only show when there's more than one photo */
+.g-arrow, .dots { display: none; }
+.gallery.multi .g-arrow, .gallery.multi .dots { display: flex; }
+
+.g-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 1;
+  width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer;
+  align-items: center; justify-content: center;
+  background: rgba(255, 253, 248, .9); color: var(--ink);
+  font-size: 22px; line-height: 1; padding-bottom: 3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  transition: opacity .2s;
+}
+.g-arrow.prev { left: 10px; }
+.g-arrow.next { right: 10px; }
+.g-arrow:disabled { opacity: 0; pointer-events: none; }
+
+/* On phones, swiping is enough: hide the arrows */
+@media (hover: none) { .gallery.multi .g-arrow { display: none; } }
+
+.dots {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 1;
+  gap: 6px; padding: 5px 8px; border-radius: 999px;
+  background: rgba(0, 0, 0, .25);
+}
+.dots button {
+  width: 7px; height: 7px; border-radius: 999px; border: none; padding: 0; cursor: pointer;
+  background: rgba(255, 255, 255, .55);
+  transition: width .25s, background .25s;
+}
+.dots button.on { width: 18px; background: white; }
+#card .body { padding: 16px 20px 10px; overflow-y: auto; }
+#card .meta {
+  font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--c);
+}
+#card h3 { font-size: 26px; line-height: 1.15; margin: 4px 0 10px; }
+#card .story { line-height: 1.65; white-space: pre-line; }
+
+#card .nav {
+  flex: none;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px 14px; border-top: 1px dashed var(--line);
+}
+#card .nav button {
+  background: none; border: 2px solid var(--c); color: var(--c);
+  border-radius: 999px; padding: 6px 14px; font-weight: 700; cursor: pointer;
+}
+#card .nav button:disabled { opacity: .3; cursor: default; }
+#card .count { font-size: 13px; color: var(--muted); }
+
+.close {
+  position: absolute; top: 10px; right: 10px; z-index: 2;
+  width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255,255,255,.92); font-size: 16px;
+}
+
+/* =========================================================
+   ENDING
+   ========================================================= */
+#ending {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(246, 243, 236, .97);
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 24px;
+}
+#ending.show { display: flex; }
+.ending-emoji { font-size: 52px; animation: bob 2.4s ease-in-out infinite; }
+#ending h2 { font-size: 40px; color: var(--green-dark); margin-top: 8px; }
+#ending p { max-width: 380px; line-height: 1.7; margin: 14px 0 26px; white-space: pre-line; }
+.ending-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.btn {
+  display: inline-block; cursor: pointer;
+  font-weight: 700; font-size: 15px;
+  background: var(--green); color: white; border: 2px solid var(--green);
+  border-radius: 999px; padding: 10px 22px;
+}
+.btn.ghost { background: transparent; color: var(--green); }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-8px) rotate(4deg); }
+}

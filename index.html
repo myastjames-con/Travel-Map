@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where We've Been</title>
+
+<!-- Leaflet: the free map library -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<!-- Fonts: a warm serif for titles, a soft rounded font for text -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ HOME: pick a map ============ -->
+<section id="home">
+  <header class="home-header">
+    <div class="mark" aria-hidden="true">🐄</div>
+    <h1>Where we've been</h1>
+    <p class="sub" id="homeSub">Pick a map to read the stories behind the pins.</p>
+  </header>
+
+  <nav id="mapGrid" class="grid"></nav>
+
+  <footer class="home-foot">Thomas <span class="amp">&amp;</span> Mya</footer>
+</section>
+
+<!-- ============ MAP VIEW ============ -->
+<section id="mapView" class="hidden">
+  <header class="topbar">
+    <a href="#/" class="back" id="backBtn">← Maps</a>
+    <h2 id="mapTitle"></h2>
+    <button class="pill" id="tourBtn">Start</button>
+  </header>
+
+  <div id="legend" class="legend hidden"></div>
+  <div id="empty" class="empty hidden">No pins here yet.</div>
+  <div id="map"></div>
+
+  <article id="card">
+    <button id="closeBtn" class="close" aria-label="Close">✕</button>
+    <div class="gallery" id="gallery">
+      <div class="slides" id="slides"></div>
+      <button class="g-arrow prev" id="gPrev" aria-label="Previous photo">‹</button>
+      <button class="g-arrow next" id="gNext" aria-label="Next photo">›</button>
+      <div class="dots" id="dots"></div>
+    </div>
+    <div class="body">
+      <div class="meta" id="cMeta"></div>
+      <h3 id="cTitle"></h3>
+      <div class="story" id="cStory"></div>
+    </div>
+    <div class="nav">
+      <button id="prevBtn">← Back</button>
+      <span id="cCount" class="count"></span>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </article>
+</section>
+
+<!-- ============ ENDING (Our Places only) ============ -->
+<div id="ending">
+  <div class="ending-emoji" aria-hidden="true">🐄</div>
+  <h2>And many more</h2>
+  <p id="endText"></p>
+  <div class="ending-btns">
+    <button class="btn" id="againBtn">See the map again</button>
+    <a class="btn ghost" href="#/">All maps</a>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
